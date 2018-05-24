@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>Departures</title>
+    <style>
+      body {
+        color: #333;
+        font: 14px "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      td {
+        margin: -1px;
+        padding: 16px;
+        border-bottom: 1px #ddd solid;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="table">
+    </table>
+    <script>
+      setTimeout(() => {
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener('load', () => document.getElementById('table').innerHTML = xhr.response);
+        xhr.open('GET', '/departures');
+        xhr.send();
+      }, 5000);
+
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(position => {
+          console.log(`${position.coords.latitude},${position.coords.longitude}`);
+          // South Ferry/Whitehall => 40.7025,-74.0128 => 3 mins
+          // Wall St = 40.706311,-74.009528 => 5 mins
+          // Bowling Green => 40.704106,-74.014521 => 6 mins
+          // Broad St => 40.707059,-74.01073 => 7 mins
+          //
+          // https://maps.googleapis.com/maps/api/distancematrix/json?mode=walking&origins=40.7034933,-74.0099033&destinations=&key=AIzaSyDLI9VAHBdvRPxolOm9JaiQmjPs2ez6WWg
+        }, error => console.log(error));
+      }
+    </script>
+  </body>
+</html>
