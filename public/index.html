@@ -27,17 +27,11 @@
         xhr.send();
       }, 5000);
 
-      if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(position => {
-          console.log(`${position.coords.latitude},${position.coords.longitude}`);
-          // South Ferry/Whitehall => 40.7025,-74.0128 => 3 mins
-          // Wall St = 40.706311,-74.009528 => 5 mins
-          // Bowling Green => 40.704106,-74.014521 => 6 mins
-          // Broad St => 40.707059,-74.01073 => 7 mins
-          //
-          // https://maps.googleapis.com/maps/api/distancematrix/json?mode=walking&origins=40.7034933,-74.0099033&destinations=&key=AIzaSyDLI9VAHBdvRPxolOm9JaiQmjPs2ez6WWg
-        }, error => console.log(error));
-      }
+      // if ('geolocation' in navigator) {
+      //   navigator.geolocation.getCurrentPosition(position => {
+      //     console.log(`${position.coords.latitude},${position.coords.longitude}`);
+      //   }
+      // }
     </script>
   </body>
 </html>
